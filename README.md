@@ -1,41 +1,82 @@
-# AI EDA Analyzer
+# 🤖 AI EDA Analyzer
 
-An AI-powered Exploratory Data Analysis (EDA) application that helps users quickly inspect and understand CSV datasets through automated dataset profiling.
-
----
-
-## Features
-
-### Current Features
-
-* Upload CSV datasets
-* Dataset preview (first 5 rows)
-* Dataset overview
-
-  * Number of rows
-  * Number of columns
-  * Total missing values
-  * Total duplicate rows
-* Display column names
-* Display data types of all columns
+An AI-powered Exploratory Data Analysis (EDA) web application built with **Python**, **Streamlit**, **Pandas**, and **Google Gemini AI**. The application helps users upload CSV datasets, automatically analyze them, visualize insights, and receive AI-generated explanations and preprocessing suggestions.
 
 ---
 
-## Tech Stack
+## 🚀 Features
 
-* Python
-* Streamlit
-* Pandas
+### 📂 Dataset Upload
+- Upload CSV datasets
+- Instant dataset preview
+
+### 📊 Dataset Overview
+- Number of rows
+- Number of columns
+- Column names
+- Data types
+- Missing values
+- Duplicate rows
+
+### 📈 Statistical Analysis
+- Summary statistics
+  - Count
+  - Mean
+  - Median
+  - Mode
+  - Standard Deviation
+  - Quartiles
+  - Minimum
+  - Maximum
+- Numerical column detection
+- Categorical column detection
+- Unique values per column
+- Correlation matrix
+
+### 📉 Data Visualization
+- Histograms
+- Box Plots
+- Correlation Heatmap
+- Count Plots
+- Pie Charts *(Optional)*
+
+### 🤖 AI Insights
+- Automatic dataset summary
+- AI-powered preprocessing suggestions
+- Missing value recommendations
+- Correlation interpretation
+- Feature importance observations
+- Natural language explanation of the dataset
+
+### 💬 AI Chat Assistant
+Ask questions about your dataset, such as:
+- Explain this dataset
+- Which columns have missing values?
+- Which features are highly correlated?
+- Suggest preprocessing steps
+- Recommend suitable machine learning algorithms
 
 ---
 
-## Project Structure
+## 🛠️ Tech Stack
 
-```text
-AI_EDA_Analyzer/
+- Python
+- Streamlit
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Google Gemini API
+
+---
+
+## 📁 Project Structure
+
+```
+AI-EDA-Analyzer/
 │
-├── app.py                 # Streamlit application
-├── eda.py                 # EDA utility functions
+├── app.py
+├── eda.py
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -43,71 +84,23 @@ AI_EDA_Analyzer/
 
 ---
 
-## Installation
+## 🎯 Project Goal
 
-Clone the repository
-
-```bash
-git clone <repository-url>
-cd AI_EDA_Analyzer
-```
-
-Create a virtual environment
-
-```bash
-python -m venv venv
-```
-
-Activate the environment
-
-**Windows**
-
-```bash
-venv\Scripts\activate
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
+The goal of this project is to simplify Exploratory Data Analysis by combining traditional statistical analysis with Generative AI. Instead of manually inspecting datasets, users receive interactive visualizations, descriptive statistics, and AI-generated insights in one place.
 
 ---
 
-## Run the Application
+## 📌 Future Improvements
 
-```bash
-streamlit run app.py
-```
-
-Open:
-
-```
-http://localhost:8501
-```
+- Export EDA report as PDF
+- Download cleaned dataset
+- Feature engineering suggestions
+- Machine Learning model recommendations
+- Interactive dashboard customization
+- Time-series analysis support
 
 ---
 
-## Current Workflow
-
-1. Upload a CSV dataset.
-2. Preview the uploaded dataset.
-3. View dataset overview.
-4. Inspect column names.
-5. Check data types of each column.
-
----
-
-## Upcoming Features
-
-* Summary statistics
-* Missing values analysis by column
-* Duplicate row analysis
-* Data visualizations
-* AI-powered dataset insights using Google Gemini
-
----
-
-## Author
+## 👨‍💻 Author
 
 **Krish Rathod**

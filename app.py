@@ -1,11 +1,12 @@
 import streamlit as st  
 import pandas as pd
-from eda import get_dataset_shape, get_column_names, get_data_types, get_missing_values, get_duplicated_values
+from eda import get_dataset_shape, get_column_names, get_data_types, get_missing_values, get_duplicated_values, get_summary_statistics, get_numerical_columns, get_categorical_columns, get_unique_values, get_correlation_matrix
 
 uploaded_file = st.file_uploader( "Upload a CSV file",type="csv")
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
+
     st.subheader("Preview")
     st.dataframe(df.head())
 
@@ -46,3 +47,33 @@ if uploaded_file is not None:
     )
 
     st.table(data_types_df)
+
+    st.subheader("Summary Statisics")
+    summary_statistics = get_summary_statistics(df)
+    st.dataframe(summary_statistics)
+
+
+    st.subheader("Columns information")
+    numerical_columns = get_numerical_columns(df)
+    categorical_columns = get_categorical_columns(df)
+
+    columns_df = pd.DataFrame(
+        {
+            "Numerical Columns": pd.Series(numerical_columns),
+            "Categorical Columns": pd.Series(categorical_columns)
+        }
+    )
+
+    st.dataframe(columns_df)
+
+    st.subheader("Unique Values")
+    unique_values = get_unique_values(df)
+
+    unique_values_df = unique_values.reset_index()
+    unique_values_df.columns = ["Column", "Unique Values"]
+
+    st.dataframe(unique_values_df)
+
+    st.subheader("Correlation Matrix")
+    correlation_matrix = get_correlation_matrix(df)
+    st.dataframe(correlation_matrix)
