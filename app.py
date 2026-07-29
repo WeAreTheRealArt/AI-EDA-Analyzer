@@ -1,10 +1,10 @@
 import streamlit as st  
 import pandas as pd
-from eda import get_dataset_shape, get_column_names, get_data_types, get_missing_values, get_duplicated_values, get_summary_statistics, get_numerical_columns, get_categorical_columns, get_unique_values, get_correlation_matrix
+from eda import get_dataset_shape, get_column_names, get_data_types, get_missing_values, get_duplicated_values, get_summary_statistics, get_numerical_columns, get_categorical_columns, get_unique_values, get_correlation_matrix, get_histogram, get_boxplot, get_heatmap, get_countplot   
 
 uploaded_file = st.file_uploader( "Upload a CSV file",type="csv")
 
-if uploaded_file is not None:
+if uploaded_file is not None:   
     df = pd.read_csv(uploaded_file)
 
     st.subheader("Preview")
@@ -77,3 +77,79 @@ if uploaded_file is not None:
     st.subheader("Correlation Matrix")
     correlation_matrix = get_correlation_matrix(df)
     st.dataframe(correlation_matrix)
+
+
+
+    st.subheader("Visualizations")
+
+    
+    option = st.selectbox(
+        "Select the Type of Plot",
+        ("Histogram", "Box Plot", "Correlation Heatmap", "Count Plot"),
+        index=None,
+        placeholder="Select the Plot...",
+    )
+
+
+    if option == "Histogram":
+
+        if not numerical_columns:
+            st.warning("No numerical columns found in the dataset.")
+
+        else:
+            selected_column = st.selectbox(
+                "Select Numerical Column",
+                numerical_columns,
+                index=None,
+                placeholder="Select a column..."
+            )
+
+            if selected_column:
+                fig = get_histogram(df, selected_column)
+                st.pyplot(fig)
+
+    elif option == "Box Plot":
+
+        if not numerical_columns:
+            st.warning("No numerical columns found in the dataset.")
+
+        else:
+            selected_column = st.selectbox(
+                "Select Numerical Column",
+                numerical_columns,
+                index=None,
+                placeholder="Select a column..."
+            )
+
+            if selected_column:
+                fig = get_boxplot(df, selected_column)
+                st.pyplot(fig)
+
+
+    elif option == "Count Plot":
+
+        if not categorical_columns:
+            st.warning("No categorical columns found in the dataset.")
+        else:
+            selected_column = st.selectbox(
+            "Select Categorical Column",
+            categorical_columns,
+            index=None,
+            placeholder="Select Column..."
+        )
+
+            if selected_column:
+                fig = get_countplot(df, selected_column)
+                st.pyplot(fig)
+
+    elif option == "Correlation Heatmap":
+
+        if len(numerical_columns) < 2:
+            st.warning("At least 2 numerical columns are required to generate a correlation heatmap.")
+
+        else:
+            correlation_matrix = get_correlation_matrix(df)
+            fig = get_heatmap(correlation_matrix)
+            st.pyplot(fig)
+
+    
