@@ -1,8 +1,35 @@
 import streamlit as st  
 import pandas as pd
-from eda import get_dataset_shape, get_column_names, get_data_types, get_missing_values, get_duplicated_values, get_summary_statistics, get_numerical_columns, get_categorical_columns, get_unique_values, get_correlation_matrix, get_histogram, get_boxplot, get_heatmap, get_countplot   
+from eda import get_dataset_shape, get_column_names, get_data_types, get_missing_values, get_duplicated_values, get_summary_statistics, get_numerical_columns, get_categorical_columns, get_unique_values, get_correlation_matrix, get_histogram, get_boxplot, get_heatmap, get_countplot
 
-uploaded_file = st.file_uploader( "Upload a CSV file",type="csv")
+from ai import test_model, model, prepare_context, build_prompt, generate_response
+
+with st.sidebar:
+
+    st.title("🤖 AI EDA Analyzer")
+
+    st.markdown("---")
+
+
+
+st.title("🤖 AI EDA Analyzer")
+
+st.caption(
+    "Upload a dataset, explore it visually, and ask AI-powered questions."
+)
+
+st.markdown("---")
+
+uploaded_file = st.file_uploader(
+        "Upload CSV",
+        type="csv"
+    )
+
+if uploaded_file is not None:
+    st.success("Dataset Loaded ✅")
+else:
+    st.info("Upload a CSV file")
+
 
 if uploaded_file is not None:   
     df = pd.read_csv(uploaded_file)
@@ -152,4 +179,27 @@ if uploaded_file is not None:
             fig = get_heatmap(correlation_matrix)
             st.pyplot(fig)
 
-    
+
+    st.subheader("AI Chatbot")
+
+    context = prepare_context(
+            shape=(rows, columns),
+            missing_values=missing,
+            duplicates=duplicated,
+            summary_statistics=summary_statistics,
+            numerical_columns=numerical_columns,
+            categorical_columns=categorical_columns,
+            unique_values=unique_values,
+            correlation_matrix=correlation_matrix,
+        )
+
+    user_question = st.chat_input("Ask anything about your dataset...")
+
+
+    if user_question:
+
+        prompt = build_prompt(context, user_question)
+
+        response = generate_response(model, prompt)
+
+        st.markdown(response)
