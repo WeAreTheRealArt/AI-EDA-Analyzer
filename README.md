@@ -1,6 +1,8 @@
 ## 🤖 InsightPilot
 AI-Powered Exploratory Data Analysis & Dataset Assistant
 
+Live Demo - (https://insightpilot-2obnvlag623karfsghylq8.streamlit.app/)
+
 An AI-powered Exploratory Data Analysis (EDA) application built with **Streamlit**, **Python**, **LangChain**, and **Google Gemini**. Upload any CSV dataset, instantly explore its statistics through interactive visualizations, and ask natural language questions about your data using an integrated AI assistant.
 
 ---
